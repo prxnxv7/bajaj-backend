@@ -2,14 +2,14 @@
     "version": 2,
     "builds": [
       {
-        "src": "api/bfhl.js",
+        "src": "api/index.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
-        "src": "/bfhl",
-        "dest": "/api/bfhl.js"
+        "src": "/index",
+        "dest": "/api/index.js"
       }
     ]
   }
