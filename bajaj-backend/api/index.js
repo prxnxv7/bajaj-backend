@@ -1,8 +1,18 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+const corsOptions = {
+    origin: 'http://localhost:3001',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+};
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
 
 const USER_ID = "pranav_jayaraj_18052003";
 const EMAIL = "pranav.jyj@gmail.com";
@@ -12,12 +22,12 @@ app.use(bodyParser.json());
 
 app.post('/bfhl', (req, res) => {
     const data = req.body.data || [];
-    // if (!Array.isArray(data)) {
-    //     return res.status(400).json({
-    //         is_success: false,
-    //         message: "Invalid input format"
-    //     });
-    // }
+    if (!Array.isArray(data)) {
+        return res.status(400).json({
+            is_success: false,
+            message: "Invalid input format"
+        });
+    }
 
     const numbers = data.filter(item => !isNaN(item)).map(String);
     const alphabets = data.filter(item => isNaN(item));
